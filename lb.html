@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网易</title>
+		<style>
+			body{
+				background-image: url(img/ban6.webp);
+				width: 800px;
+				height: 800%;
+				
+			}
+			.box{
+				width: 850px;
+				height: 500px;
+				box-shadow: 0 5px 15px rgba(0,0,0,.8);
+				overflow: hidden;
+				position: fixed;
+				top: 50%;
+				left:50%;
+				transform: translate(-50%,-50%);
+				border-radius: 10px;
+			}
+			
+			.imgList{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.imgList>a{
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			.imgList>a>img{
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			.showImg{
+				z-index: 9;
+			}
+			
+			.leftBtn,.rightBtn{
+				position: absolute;
+				top: 50%;
+				transform: translate(0,-50%);
+				font-size: 45px;
+				color: rgba(0,0,0,.8);
+				z-index: 99;
+				cursor: pointer;
+			}
+			.leftBtn{
+				left: 10px;
+			}
+			.rightBtn{
+				right: 10px;
+			}
+			.btn{
+				display: flex;
+				position: absolute;
+				bottom: 15px;
+				left: 50%;
+				transform: translate(-50%,0);
+				z-index: 99;
+				cursor: pointer;
+			}
+			
+			.btn>span{
+				width: 18px;
+				height: 18px;
+				border-radius: 100%;
+				background: rgba(0,0,0,.8);
+				margin-right: 15px;
+				cursor: pointer;
+			}
+			
+			.btn>span:last-child{
+				margin: 0;
+			}
+			
+			.btn>.checked{
+				background-color: #B3A5FC !important;
+			}
+		
+			.enter{
+				
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box">
+			
+			
+			<div class="imgList">
+				<a href="#" class="showImg">
+					<img src="img/ban1.webp" alt="">
+				</a>
+				<a href="#">
+					<img src="img/ban2.webp" alt="">
+				</a>
+				<a href="#">
+					<img src="img/ban3.webp" alt="">
+				</a>
+				<a href="#">
+					<img src="img/ban4.webp" alt="">
+				</a>
+				<a href="#">
+					<img src="img/ban5.webp" alt="">
+				</a>
+			</div>
+			<div><li class="enter">进入游戏</li></div>
+			<span class="leftBtn">&lt;</span>
+			<span class="rightBtn">&gt;</span>
+			<div class="btn">
+				<span class="checked"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				</div>
+		</div>
+		<script>
+			window.onload=function(){
+				var imgList = document.querySelectorAll(".imgList>a");
+				var btnList = document.querySelectorAll(".box>.btn>span");
+				var lbtn = document.querySelector(".leftBtn");
+				var rbtn = document.querySelector(".rightBtn");
+				var time = 3000;
+				var index = 0;
+				var dingshiqi;
+				start();
+				function start(){
+					dingshiqi = setInterval(function(){
+						index==imgList.length - 1 ? index=0 : index++;
+						switchPublic();
+					},time)
+				}
+				function switchPublic(){
+					for(var i =0;i<imgList.length;i++){
+						imgList[i].classList.remove('showImg')
+						btnList[i].classList.remove('checked')
+					}
+					imgList[index].classList.add('showImg')
+					btnList[index].classList.add('checked')
+				}
+				lbtn.onclick=function(){
+					clearInterval(dingshiqi)
+					index==0 ? index = imgList.length - 1 : index--;
+					switchPublic();
+					start();
+				}
+				rbtn.onclick=function(){
+					clearInterval(dingshiqi)
+					index == imgList.length - 1 ? index = 0 : index ++;
+					switchPublic();
+					start();
+				}
+				for(let i = 0;i<btnList.length;i++){
+					btnList[i].onclick=function(){
+						clearInterval(dingshiqi)
+						index = i;
+						switchPublic();
+						start();
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

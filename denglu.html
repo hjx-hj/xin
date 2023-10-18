@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/h.css" />
+	</head> 
+	
+	<body>
+		<div class="quan">
+			<div class="container">
+			<form action="" class="login">
+				<h1>网易游戏登录</h1>
+				<input type="text" id="uname" placeholder="请输入账号hjxbl" onblur="checkId();">
+				<div class="name-label" id="error_name"></div>
+				</div>
+				<input type="text" id="pwd" placeholder="请输入密码12345678" onblur="checkpwd();">
+				<div class="name -two" id="error_pwd"></div>
+				<input type="text" id="rq" placeholder="请确认密码12345678" onblur="checkrq();">
+				<div class="name -three" id="error_rq"></div>
+				<div class="btn">
+					<input type="button" value="登录" class="btn1" id=login_btn onclick="login();">
+					<input type="button" value="注册" class="btn2">
+				</div>
+				
+				
+			</form>
+			
+			
+			
+			
+		</div>
+		<script type="text/javascript">
+			var flag1=false;
+			var flag2=false;
+			var flag3=false;
+			function $(id){
+				return document.getElementById(id);
+				
+			}
+			function checkId(){
+				$("error_name").innerText="";
+				var userName =$("uname").value;
+				if(userName == "" || userName == null){
+					$("error_name").innerText ="*用户名不能为空！";
+					return;
+				}
+				if(userName.length <4 || userName.length >20){
+					$("error_name").innerText ="*长度在4~20之间";
+					return;
+				}
+				var userMatch = /[a-zA-Z][a-zA-Z0-9_]*$/
+				if(!userName.match(userMatch)){
+					$("error_name").innerText ="*以英文字母开头，只能包含英文字母、数字、下划线";
+					return;
+				}
+				
+				flag1=true;
+			}
+			function checkpwd(){
+				
+				$("error_pwd").innerText="";
+				var userPwd =$("pwd").value;
+				if(userPwd == "" || userPwd == null){
+					$("error_pwd").innerText ="*密码不能为空！";
+					return;
+			}
+			if(userPwd.length <8 || userPwd.length >20){
+				$("error_pwd").innerText ="*密码长度在8~20之间";
+				return;}
+				flag2=true;
+				}
+				function checkrq(){
+					$("error_rq").innerText="";
+					var userRq =$("rq").value;
+					var userPwd=$("pwd").value;
+					if(userRq == "" || userRq == null){
+						$("error_rq").innerText ="*确认密码不能为空！";
+						return;
+				}
+				if(userRq != userPwd)
+				$("error_rq").innerText ="*输入的两次密码不一致！";
+				return;}
+				flag3=true;
+				
+				function login(){
+					if(flag1 && flag2 && flag3){
+						var userName =$("uname").value;
+						var userPwd =$("pwd").value;
+						if(userName =="hjxdl" && userPwd =="12345678"){
+							window.location.href="./lb.html"
+						} 
+						else{
+							alert("账号，密码输入不正确！请重新输入。");
+						}
+					}
+					else{
+						alert("检查账号或密码是否符合规定！");
+					}
+				}
+				
+		</script>
+	</body>
+</html>
